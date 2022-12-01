@@ -4,8 +4,11 @@
 from bs4 import BeautifulSoup
 import requests
 import datetime
-import os
 from time import sleep
+
+class FetchMetar:
+    def __init__(self, startDate, endDate, station):
+        pass
 
 def fetch_metar_data(date, station):
     url = 'http://www.ogimet.com/display_metars2.php?lang=en&lugar=%s&tipo=ALL&ord=REV&nil=SI&fmt=html&ano=%d&mes=%02d&day=%02d&hora=00&anof=%d&mesf=%02d&dayf=%02d&horaf=23&minf=59&send=send'%(station, date.year, date.month, date.day, date.year, date.month, date.day)
