@@ -7,11 +7,23 @@ import datetime
 from time import sleep
 
 class MetarData:
-    def __init__(self, station, date, time, metar):
+    def __init__(self, station, date, time, metars):
         self.station = station
         self.date = date
         self.time = time
-        self.metar = metar
+        self.metars = metars
+    
+    def __str__(self):
+        return f"Station: {self.station}, Date: {self.date}, Time: {self.time}, Metar: {self.metar}"
+    
+    def __repr__(self):
+        return f"Station: {self.station}, Date: {self.date}, Time: {self.time}, Metar: {self.metar}"
+    
+    def exportToCSV(self, filename):
+        with open(filename, 'o') as f:
+            f.write(f"Station,Date,Time,Type,Data")
+            for metar in self.meatrs:
+                f.write(f"{self.station},{self.date},{self.time},{metar[0]},{metar[1]}\n")
 
 class FetchMetar:
     def __init__(self, startDate, endDate, station, type='SA&FT', interval=5):
@@ -36,6 +48,14 @@ class FetchMetar:
                 sleep(1)
         soup = BeautifulSoup(r.content, 'html.parser')
         metar_data = soup.find_all('tr')
+        return metar_data
+    
+    def getMetarData(self):
+        metar_data = []
+        date = self.startDate
+        while date <= self.endDate:
+            metar_data.extend(self.fetch(date))
+            date += datetime.timedelta(days=1)
         return metar_data
 
 def fetch_metar_data(date, station):
