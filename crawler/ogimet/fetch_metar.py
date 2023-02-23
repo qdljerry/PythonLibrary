@@ -20,7 +20,7 @@ class MetarData:
         return f"Station: {self.station}, Date: {self.date}, Time: {self.time}, Metar: {self.metar}"
     
     def exportToCSV(self, filename):
-        with open(filename, 'o') as f:
+        with open(filename, 'w') as f:
             f.write(f"Station,Date,Time,Type,Data")
             for metar in self.meatrs:
                 f.write(f"{self.station},{self.date},{self.time},{metar[0]},{metar[1]}\n")
@@ -73,7 +73,7 @@ def fetch_metar_data(date, station):
     metar_data = soup.find_all('tr')
     return metar_data
 
-with open('metar_data.csv', 'o') as f:
+with open('metar_data.csv', 'w') as f:
     f.write('airport,type,date,time,data\n')
 start = datetime.datetime(2022, 10, 23)
 end = datetime.datetime(2022, 11, 29)
