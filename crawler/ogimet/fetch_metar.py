@@ -1,5 +1,5 @@
 # Created by qdljerry 2022/11
-# Copyright [2022] [Donglin Qiu]
+# Copyright 2022 Donglin Qiu
 # [Warning] This code is NOT completed as a library
 
 from bs4 import BeautifulSoup
